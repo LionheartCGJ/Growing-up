@@ -88,16 +88,20 @@ var seckill = {
 					console.log("killUrl: " + killUrl);
 					//绑定一次点击事件
 					//1，先禁用按钮
-					$(this).addClass('disables');//,<-$(this)===('#killBtn')>
+					$(this).addClass('disabled');//,<-$(this)===('#killBtn')>
 					//2，发送秒杀请求执行秒杀
 					$.post(killUrl, {}, function(result){
-						if(result && result['success']){
-							var killResult = result['data'];
-							var state = killResult['state'];
-							var stateInfo = killResult['stateInfo'];
-							//显示秒杀结果
-							node.html('<span class="label label-success">'+stateInfo+'</span>');
-						}
+						if(result){
+							if(result['success']){
+								var killResult = result['data'];
+								var state = killResult['state'];
+								var stateInfo = killResult['stateInfo'];
+								//显示秒杀结果
+								node.html('<span class="label label-success">'+stateInfo+'</span>');
+							} else {
+								node.html('<span class="label label-success">'+result['error']+'</span>');
+							}
+						} 
 					});
 					node.show();
 				} else {
@@ -121,7 +125,7 @@ var seckill = {
 			seckillBox.html('秒杀结束！');
 		} else if (nowTime < startTime){
 			//秒杀未开始，计时事件绑定
-			var killTime = new Date(startTime + 1000);//todo 防止时间偏差
+			var killTime = new Date(Number(startTime) + 1000);//todo 防止时间偏差
 			seckillBox.countdown(killTime, function(event){
 				//时间格式
 				var format = event.strftime('秒杀倒计时： %D天 %H时 %M分 %S秒 ');

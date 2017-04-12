@@ -24,12 +24,12 @@
         </div>
     </div>
     <!-- login popup layer, input user phone-->
-    <div class="modal fade" id="killPhoneModeal">
+    <div class="modal fade" id="killPhoneModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title text-center">
-                        <span class="glyphicon glyphicon-phone"></span>
+                        <span class="glyphicon glyphicon-phone"></span>秒杀电话：
                     </h3>
                 </div>
                 <div class="modal-body">
@@ -68,10 +68,10 @@
     $(function(){
         //用EL表达式传入参数
         seckill.detail.init({
-           seckillId:${seckill.seckillId},
-           startTime:${seckill.startTime.time},//毫秒
-           endTime:${seckill.endTime.time}
+           seckillId:"${seckill.seckillId}",
+           startTime:"${seckill.startTime.time}",//毫秒
+           endTime:"${seckill.endTime.time}"
         });
-    })
+    });
 </script>
 </html>
