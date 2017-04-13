@@ -14,9 +14,7 @@
                 <h1>${seckill.name}</h1>
             </div>
             <div class="panel-body">
-                <h2 class="text-denger">
-                    <!-- show time icon -->
-                    <span class="glyphicon glyphicon-time"></span>
+                <h2 class="text-danger">
                     <!-- display count down -->
                     <span class="glyphicon" id="seckill-box"></span>
                 </h2>

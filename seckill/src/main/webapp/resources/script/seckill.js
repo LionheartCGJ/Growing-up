@@ -49,7 +49,7 @@ var seckill = {
 						window.location.reload();
 					} else {
 						//todo 错误文案信息抽取到前端字典里
-						$('killPhoneMessage').hide().html('<label class="label label-danger">手机号错误！</labek>').show(300);
+						$('#killPhoneMessage').hide().html('<label class="label label-danger">手机号错误！</labek>').show(300);
 					}
 				});
 			}
@@ -91,6 +91,8 @@ var seckill = {
 					$(this).addClass('disabled');//,<-$(this)===('#killBtn')>
 					//2，发送秒杀请求执行秒杀
 					$.post(killUrl, {}, function(result){
+						debugger;
+						$('#timeIcon').addClass('fade');
 						if(result){
 							if(result['success']){
 								var killResult = result['data'];
@@ -128,8 +130,8 @@ var seckill = {
 			var killTime = new Date(Number(startTime) + 1000);//todo 防止时间偏差
 			seckillBox.countdown(killTime, function(event){
 				//时间格式
-				var format = event.strftime('秒杀倒计时： %D天 %H时 %M分 %S秒 ');
-				seckillBox.html(format);
+				var format = event.strftime(' 秒杀倒计时： %D天 %H时 %M分 %S秒 ');
+				seckillBox.html('<span class="glyphicon-time""></span>' + format);
 			}).on('finish.countdown',function(){
 				//时间完成后回调事件
 				//获取秒杀地址，控制时间逻辑，执行秒杀
