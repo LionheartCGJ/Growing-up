@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.seckill.dao.SeckillDao;
 import org.seckill.dao.SuccessKilledDao;
+import org.seckill.dao.cache.RedisDao;
 import org.seckill.dto.Exposer;
 import org.seckill.dto.SeckillExecution;
 import org.seckill.entity.Seckill;
@@ -26,13 +27,15 @@ public class SeckilServiceImpl implements SeckillService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    //注入Service依赖
+    // 注入Service依赖
     @Autowired
     private SeckillDao seckillDao;
 
     @Autowired
     private SuccessKilledDao successKilledDao;
 
+    @Autowired
+    private RedisDao redisDao;
     // 盐值，用于混淆MD5
     private final String salt = "a;lsjda;sd/.samfdlasjfsa023;akdsdjflsdjfl";
 
@@ -45,11 +48,16 @@ public class SeckilServiceImpl implements SeckillService {
     }
 
     public Exposer exportSeckillUrl(long seckillId) {
-        Seckill seckill = seckillDao.queryById(seckillId);
+        // 优化点：缓存优化(缓存超时的基础上维护一致性)
+        // 1.访问redis
+        Seckill seckill = redisDao.getSeckill(seckillId);
         if (null == seckill) {
-            return new Exposer(false, seckillId);
+            seckill = seckillDao.queryById(seckillId);
+            if (null == seckill) {
+                return new Exposer(false, seckillId);
+            }
+            redisDao.putSeckill(seckill);
         }
-
         Date startTime = seckill.getStartTime();
         Date endTime = seckill.getEndTime();
         Date now = new Date();
@@ -63,8 +71,7 @@ public class SeckilServiceImpl implements SeckillService {
     }
 
     /**
-     * 使用注解来控制事物方法的优点
-     * 1：开发团队达成一致约定，明确标注事物方法的编程风格。
+     * 使用注解来控制事物方法的优点 1：开发团队达成一致约定，明确标注事物方法的编程风格。
      * 2：保证事务方法的执行时间尽可能的短，不要穿插其他的网络操作RPC/HTTP请求或或者剥离到事物方法外
      * 3：不是所有的方法都需要事物，如只有一条修改操作、只读操作不需要事物控制
      */
@@ -87,7 +94,7 @@ public class SeckilServiceImpl implements SeckillService {
                     throw new RepeatKillException("sekill repeated");
                 } else {
                     SuccessKilled successKilled = successKilledDao.queryByIdWithSeckill(seckillId, userPhone);
-                    return new SeckillExecution(seckillId,SeckillStatEnum.SUCCESS, successKilled);
+                    return new SeckillExecution(seckillId, SeckillStatEnum.SUCCESS, successKilled);
                 }
             }
 
