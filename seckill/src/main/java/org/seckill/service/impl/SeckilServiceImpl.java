@@ -1,8 +1,11 @@
 package org.seckill.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.seckill.dao.SeckillDao;
 import org.seckill.dao.SuccessKilledDao;
 import org.seckill.dao.cache.RedisDao;
@@ -43,10 +46,12 @@ public class SeckilServiceImpl implements SeckillService {
         return seckillDao.queryAll(0, 4);
     }
 
+    @Override
     public Seckill getById(long seckillId) {
         return seckillDao.queryById(seckillId);
     }
 
+    @Override
     public Exposer exportSeckillUrl(long seckillId) {
         // 优化点：缓存优化(缓存超时的基础上维护一致性)
         // 1.访问redis
@@ -76,6 +81,7 @@ public class SeckilServiceImpl implements SeckillService {
      * 3：不是所有的方法都需要事物，如只有一条修改操作、只读操作不需要事物控制
      */
     @Transactional
+    @Override
     public SeckillExecution executeSeckill(long seckillId, long userPhone, String md5)
             throws SeckillException, SeckillCloseException, RepeatKillException {
         if (md5 == null || !md5.equals(getMD5(seckillId))) {
@@ -108,10 +114,46 @@ public class SeckilServiceImpl implements SeckillService {
     }
 
     /**
+     * 通过mysql的存储过程，执行秒杀逻辑，实现高并发
+     * 
+     * @param seckillID
+     * @param userPhone
+     * @param md5
+     *            return SeckillExecution
+     */
+    @Override
+    public SeckillExecution executeSeckillProcedure(long seckillId, long userPhone, String md5) {
+        if (null == md5 || !md5.equals(getMD5(seckillId))) {
+            return new SeckillExecution(seckillId, SeckillStatEnum.DATA_REWRITE);
+        }
+        Date killTime = new Date();
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("seckillId", seckillId);
+        paramMap.put("phone", userPhone);
+        paramMap.put("killTime", killTime);
+        paramMap.put("result", null);
+        // 执行存储过程，result被赋值
+        try {
+            seckillDao.killByprocedure(paramMap);
+            // 获取result
+            int result = MapUtils.getInteger(paramMap, "result", -2);
+            if (1 == result) {
+                SuccessKilled sk = successKilledDao.queryByIdWithSeckill(seckillId, userPhone);
+                return new SeckillExecution(seckillId, SeckillStatEnum.SUCCESS, sk);
+            } else {
+                return new SeckillExecution(seckillId, SeckillStatEnum.stateOf(result));
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return new SeckillExecution(seckillId, SeckillStatEnum.INNER_ERROR);
+        }
+    }
+
+    /**
      * 生成MD5字符串
      * 
      * @param seckillId
-     * @return
+     * @return md5
      */
     private String getMD5(long seckillId) {
         String base = seckillId + "/" + salt;

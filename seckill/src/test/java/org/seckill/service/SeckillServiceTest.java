@@ -64,7 +64,7 @@ public class SeckillServiceTest {
 
     //测试代码完整逻辑，注意重复执行
     @Test
-    public void TestSeckillLogic() throws Exception {
+    public void testSeckillLogic() throws Exception {
         long id = 1000L;
         Exposer exposer = seckillService.exportSeckillUrl(id);
         logger.info("exposer={}", exposer);
@@ -72,6 +72,20 @@ public class SeckillServiceTest {
             long phone = 17600119185L;
             String md5 = exposer.getMd5();
             SeckillExecution seckillExecution = seckillService.executeSeckill(id, phone, md5);
+            logger.info("seckillExecution={}", seckillExecution);
+        }
+    }
+    
+    // 测试存储过程实现秒杀逻辑
+    @Test
+    public void testSeckillProcedure() throws Exception {
+        long seckillId = 1000L;
+        long userPhone = 17600118284L;
+        Exposer exposer = seckillService.exportSeckillUrl(seckillId);
+        logger.info("exposer={}", exposer);
+        if (exposer.isExposed()) {
+            String md5 = exposer.getMd5();
+            SeckillExecution seckillExecution = seckillService.executeSeckillProcedure(seckillId, userPhone, md5);
             logger.info("seckillExecution={}", seckillExecution);
         }
     }
