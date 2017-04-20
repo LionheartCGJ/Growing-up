@@ -12,7 +12,7 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd
 ">
     <!-- 扫描service包下所有使用注解的类型 -->
-    <!-- @Component @Service @Dao @Controller -->
+    <!-- @Component @Repository @Service @Controller -->
     <context:component-scan base-package="org.seckill.service" />
     <!-- 配置事务管理器（mybatis使用jdbc的事务管理器） -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

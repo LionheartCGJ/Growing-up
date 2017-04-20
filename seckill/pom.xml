@@ -8,7 +8,7 @@
   <name>seckill Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
- <dependency>
+    <dependency>
       <!-- 3.0的junit是使用编程的方式来进行测试，而junit4是使用注解的方式来运行junit -->
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
