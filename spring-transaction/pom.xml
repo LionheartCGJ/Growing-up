@@ -72,6 +72,23 @@
         <artifactId>spring-tx</artifactId>
         <version>4.1.7.RELEASE</version>
     </dependency>
+    <!-- spring aop相关依赖 -->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aop</artifactId>
+        <version>4.1.7.RELEASE</version>
+    </dependency>
+    <dependency>
+        <groupId>aopalliance</groupId>
+        <artifactId>aopalliance</artifactId>
+        <version>1.0</version>
+    </dependency>
+    <!-- aspectj 相关依赖 -->
+    <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjweaver</artifactId>
+        <version>1.6.8</version>
+    </dependency>
     <!-- spring test相关依赖 -->
     <dependency>
         <groupId>org.springframework</groupId>
