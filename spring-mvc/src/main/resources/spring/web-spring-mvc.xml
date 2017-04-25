@@ -30,7 +30,15 @@
        <property name="prefix" value="/WEB-INF/jsp/"/>
        <property name="suffix" value=".jsp"/>
      </bean>
-     <!-- 4：扫描web相关的bean -->
+     <!-- 4:设置文件上传相关配置 -->
+     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 200*1024*1024=200M -->
+        <property name="maxUploadSize" value="209715200"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!-- 启用resolveLazily属性，推迟文件解析，以便捕获文件大小异常 -->
+        <property name="resolveLazily" value="true"/>
+     </bean>
+     <!-- 5：扫描web相关的bean -->
      <context:component-scan base-package="com.cgj.spring.mvc.controller">
         <!-- 只扫描@Controller标注的类，不扫描其他标注的类 -->
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
