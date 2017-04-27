@@ -61,7 +61,12 @@ public class HelleMvcController {
         return new Date();
     }
 
-    @RequestMapping(value = "upload", method = RequestMethod.POST)
+    @RequestMapping(value = "/interceptor", method = RequestMethod.GET)
+    public String testInterceptor() {
+        return "home";
+    }
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String doUploadFile(@RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
             logger.info("Process file:{}", file.getOriginalFilename());

@@ -43,4 +43,12 @@
         <!-- 只扫描@Controller标注的类，不扫描其他标注的类 -->
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
      </context:component-scan>
+    <!-- 注册spring mvc拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**/interceptor"/>
+            <!-- 配置拦截规则 -->
+            <bean class="com.cgj.spring.mvc.interceptor.HelloMvcInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
