@@ -32,6 +32,10 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <!-- 拦截器和过滤器的区别：
+             a.过滤器Filter依赖于Servlet容器，基于回掉函数，过滤范围大
+             b.拦截器Interceptor依赖于框架容器，基于反射机制，只过滤请求
+     -->
     <filter>
         <filter-name>encoding</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class NIODirectMemoryTest {
 
     public static void main(String[] args) {
+        @SuppressWarnings("rawtypes")
         Class bitsClass = null;
         try {
             // 通过类的全限定名，获取类的字节码文件

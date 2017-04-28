@@ -19,15 +19,16 @@ public class Client{
         InputStream  inStram=s.getInputStream();
         OutputStream outStream=s.getOutputStream();
         
-        // Êä³ö
+        // ï¿½ï¿½ï¿½
         PrintWriter out=new PrintWriter(outStream,true);
         
-        out.print("getPublicKeyÄãºÃ£¡");
+        out.print("getPublicKeyï¿½ï¿½Ã£ï¿½");
         out.flush();
 
-        s.shutdownOutput();// Êä³ö½áÊø
+        s.shutdownOutput();// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         
-        // ÊäÈë
+        // ï¿½ï¿½ï¿½ï¿½
+        @SuppressWarnings("resource")
         Scanner in=new Scanner(inStram);
         StringBuilder sb=new StringBuilder();
         while(in.hasNextLine()){
