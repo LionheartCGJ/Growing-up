@@ -1,6 +1,7 @@
 package test;
 
 import java.lang.reflect.Field;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class NIODirectMemoryTest {
 
@@ -14,7 +15,13 @@ public class NIODirectMemoryTest {
                 Field maxMemory = bitsClass.getDeclaredField("maxMemory");
                 maxMemory.setAccessible(true);
                 Object maxValue = maxMemory.get(bitsClass);
-                System.out.println(maxValue);
+                long value = 0L;
+                if (maxValue instanceof Long) {
+                    value = (Long) maxValue;
+                } else if (maxValue instanceof AtomicLong) {
+                    value = ((AtomicLong) maxValue).get();
+                }
+                System.out.println(value);
             } catch (SecurityException e) {
                 e.printStackTrace();
             } catch (NoSuchFieldException e) {
@@ -25,11 +32,17 @@ public class NIODirectMemoryTest {
                 e.printStackTrace();
             }
             try {
-                //获取静态私有属性reservedMemory及其值
+                // 获取静态私有属性reservedMemory及其值
                 Field reservedMemory = bitsClass.getDeclaredField("reservedMemory");
                 reservedMemory.setAccessible(true);
                 Object reservedValue = reservedMemory.get(bitsClass);
-                System.out.println(reservedValue);
+                long value = 0L;
+                if (reservedValue instanceof Long) {
+                    value = (Long) reservedValue;
+                } else if (reservedValue instanceof AtomicLong) {
+                    value = ((AtomicLong) reservedValue).get();
+                }
+                System.out.println(value);
             } catch (SecurityException e) {
                 e.printStackTrace();
             } catch (NoSuchFieldException e) {
