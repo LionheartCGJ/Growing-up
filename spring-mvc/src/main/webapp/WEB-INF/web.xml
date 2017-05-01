@@ -12,10 +12,16 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring-*.xml</param-value>
     </context-param>
+    <context-param>
+        <param-name>author</param-name>
+        <param-value>CGJ</param-value>
+    </context-param>
 
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+    <!-- 配置Session超时时间 -->
+    <session-config>
+        <!-- 单位分钟，设置0表示没有超时限制 -->
+        <session-timeout>1</session-timeout>
+    </session-config>
 
     <servlet>
         <servlet-name>dispatcher</servlet-name>
@@ -36,6 +42,7 @@
              a.过滤器Filter依赖于Servlet容器，基于回掉函数，过滤范围大
              b.拦截器Interceptor依赖于框架容器，基于反射机制，只过滤请求
      -->
+     <!-- 注册web拦截器 -->
     <filter>
         <filter-name>encoding</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -48,4 +55,19 @@
         <filter-name>encoding</filter-name>
         <url-pattern>/</url-pattern>
     </filter-mapping>
+
+    <!-- 注册web监听器 -->
+    <listener>
+        <!-- spring上下文加载拦截器 -->
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>com.cgj.spring.mvc.listener.MyServletContextListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>com.cgj.spring.mvc.listener.MyHttpSessionListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>com.cgj.spring.mvc.listener.MyServletRequestListener</listener-class>
+    </listener>
 </web-app>
