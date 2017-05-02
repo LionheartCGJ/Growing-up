@@ -4,7 +4,7 @@
          xsi:schemaLocation="
              http://xmlns.jcp.org/xml/ns/javaee
              http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-    version="3.1" metadata-complete="true">
+    version="3.1" metadata-complete="false">
     <display-name>Archetype Created Web Application</display-name>
 
     <!-- Spring应用上下文，层次化的ApplicationContext -->
@@ -61,6 +61,7 @@
         <!-- spring上下文加载拦截器 -->
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+<!-- ServletContext、HttpSession、ServletRequest 创建销毁的监听器
     <listener>
         <listener-class>com.cgj.spring.mvc.listener.MyServletContextListener</listener-class>
     </listener>
@@ -70,4 +71,16 @@
     <listener>
         <listener-class>com.cgj.spring.mvc.listener.MyServletRequestListener</listener-class>
     </listener>
+-->
+<!-- ServletContext、HttpSession、ServletRequest 中属性的添加、删除和替换的监听器
+    <listener>
+        <listener-class>com.cgj.spring.mvc.listener.MyServletContextAttributeListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>com.cgj.spring.mvc.listener.MyHttpSessionAttributeListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>com.cgj.spring.mvc.listener.MyServletRequestAttributeListener</listener-class>
+    </listener>
+-->
 </web-app>

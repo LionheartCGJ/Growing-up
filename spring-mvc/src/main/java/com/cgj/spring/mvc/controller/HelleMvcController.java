@@ -24,7 +24,7 @@ public class HelleMvcController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @RequestMapping("/mvc")
+    @RequestMapping("/home")
     public String helloSpringMVC(Model model) {
         String sayHello = "Hello spring MVC! My name is Guangjin.chen";
         model.addAttribute("text", sayHello);
@@ -64,6 +64,16 @@ public class HelleMvcController {
     @RequestMapping(value = "/interceptor", method = RequestMethod.GET)
     public String testInterceptor() {
         return "home";
+    }
+
+    @RequestMapping("/init")
+    public String initAttribute() {
+        return "init";
+    }
+
+    @RequestMapping("/destroyed")
+    public String destroyedAttribute() {
+        return "destroyed";
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
