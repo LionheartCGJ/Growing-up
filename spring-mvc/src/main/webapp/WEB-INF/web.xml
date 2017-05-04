@@ -12,6 +12,12 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring-*.xml</param-value>
     </context-param>
+
+    <listener>
+        <!-- spring上下文加载拦截器 -->
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
     <context-param>
         <param-name>author</param-name>
         <param-value>CGJ</param-value>
@@ -57,10 +63,6 @@
     </filter-mapping>
 
     <!-- 注册web监听器 -->
-    <listener>
-        <!-- spring上下文加载拦截器 -->
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
 <!-- ServletContext、HttpSession、ServletRequest 创建销毁的监听器
     <listener>
         <listener-class>com.cgj.spring.mvc.listener.MyServletContextListener</listener-class>
