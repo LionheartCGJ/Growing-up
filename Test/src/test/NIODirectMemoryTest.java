@@ -8,53 +8,49 @@ public class NIODirectMemoryTest {
     public static void main(String[] args) {
         @SuppressWarnings("rawtypes")
         Class bitsClass = null;
+        Field maxMemory = null;
+        Field reservedMemory = null;
         try {
             // 通过类的全限定名，获取类的字节码文件
             bitsClass = Class.forName("java.nio.Bits");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();// debugger out info
+        }
+        if (bitsClass != null) {
             try {
                 // 获取静态私有属性maxMemory及其值
-                Field maxMemory = bitsClass.getDeclaredField("maxMemory");
+                maxMemory = bitsClass.getDeclaredField("maxMemory");
                 maxMemory.setAccessible(true);
-                Object maxValue = maxMemory.get(bitsClass);
-                long value = 0L;
-                if (maxValue instanceof Long) {
-                    value = (Long) maxValue;
-                } else if (maxValue instanceof AtomicLong) {
-                    value = ((AtomicLong) maxValue).get();
-                }
-                System.out.println(value);
-            } catch (SecurityException e) {
-                e.printStackTrace();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-            try {
                 // 获取静态私有属性reservedMemory及其值
-                Field reservedMemory = bitsClass.getDeclaredField("reservedMemory");
+                reservedMemory = bitsClass.getDeclaredField("reservedMemory");
                 reservedMemory.setAccessible(true);
-                Object reservedValue = reservedMemory.get(bitsClass);
-                long value = 0L;
-                if (reservedValue instanceof Long) {
-                    value = (Long) reservedValue;
-                } else if (reservedValue instanceof AtomicLong) {
-                    value = ((AtomicLong) reservedValue).get();
-                }
-                System.out.println(value);
-            } catch (SecurityException e) {
-                e.printStackTrace();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();// debugger out info
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        }
+        for (int i = 0; i < 100; i++) {
+            if (maxMemory != null && reservedMemory != null) {
+                try {
+                    Object maxValue = maxMemory.get(bitsClass);
+                    long maxLong = 0L;
+                    if (maxValue instanceof Long) {
+                        maxLong = (Long) maxValue;
+                    } else if (maxValue instanceof AtomicLong) {
+                        maxLong = ((AtomicLong) maxValue).get();
+                    }
+                    System.out.println(maxLong);
+                    Object reservedValue = reservedMemory.get(bitsClass);
+                    long reservedLong = 0L;
+                    if (reservedValue instanceof Long) {
+                        reservedLong = (Long) reservedValue;
+                    } else if (reservedValue instanceof AtomicLong) {
+                        reservedLong = ((AtomicLong) reservedValue).get();
+                    }
+                    System.out.println(reservedLong);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }
