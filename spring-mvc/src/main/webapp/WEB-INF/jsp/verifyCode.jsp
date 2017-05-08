@@ -8,9 +8,11 @@
 </head>
 <body>
 <div align="center">
-    验证码：<input type="text" name="verifyCode" />
-    <img alt="验证码" src="">
-    <a href="javascript:reloadCode();">看不清楚</a>
+  <form action="/verify/code/verify" method="post">
+        验证码：<input type="text" name="verifyCode" style="height: 32px;vertical-align: middle;" />
+        <img alt="验证码" src="/verify/code/img" style="vertical-align: middle;" onclick="window.location.href='/verify/code/page'"/>
+        <input type="submit"/>
+   </form>
 </div>
 </body>
 </html>

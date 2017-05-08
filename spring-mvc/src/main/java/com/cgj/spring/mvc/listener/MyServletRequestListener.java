@@ -20,7 +20,7 @@ public class MyServletRequestListener implements ServletRequestListener {
     @SuppressWarnings("unchecked")
     @Override
     public void requestInitialized(ServletRequestEvent arg0) {
-        System.out.println("Request Initialized!");
+        //System.out.println("Request Initialized!");
         userMap = (Map<String, User>) arg0.getServletContext().getAttribute("userMap");
         if (userMap == null) {
             userMap = new HashMap<String, User>();
@@ -39,7 +39,7 @@ public class MyServletRequestListener implements ServletRequestListener {
 
     @Override
     public void requestDestroyed(ServletRequestEvent arg0) {
-        System.out.println("Request Destroyed!");
+        //System.out.println("Request Destroyed!");
     }
 
 }

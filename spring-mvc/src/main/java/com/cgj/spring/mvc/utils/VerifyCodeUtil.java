@@ -51,7 +51,7 @@ public class VerifyCodeUtil {
             // 设置字体大小
             graphic.setFont(new Font(null, Font.BOLD + Font.ITALIC, FONT_SIZE));
             // 画字符
-            graphic.drawString(str, i * WIDTH / SIZE, HEIGHT * 2 / 3);
+            graphic.drawString(str, i * WIDTH / SIZE, HEIGHT * 3/4);
         }
         // 6.画干扰线
         for (int i = 0; i < LINES; i++) {

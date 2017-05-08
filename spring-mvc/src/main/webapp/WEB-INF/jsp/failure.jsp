@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Success page</title>
+<title>Failure page</title>
 </head>
 <body>
     <div align="center">
-        <h1>Success!</h1>
+        <h1>Failure!</h1>
     </div>
 </body>
 </html>

@@ -15,7 +15,7 @@ public class MyHttpSessionListener implements HttpSessionListener {
 
     @Override
     public void sessionCreated(HttpSessionEvent arg0) {
-        System.out.println("Session Created!");
+        //System.out.println("Session Created!");
         userCount++;
         arg0.getSession().getServletContext().setAttribute("userCount", userCount);
     }
@@ -23,7 +23,7 @@ public class MyHttpSessionListener implements HttpSessionListener {
     @SuppressWarnings("unchecked")
     @Override
     public void sessionDestroyed(HttpSessionEvent arg0) {
-        System.out.println("Session Destroyed!");
+        //System.out.println("Session Destroyed!");
         userCount--;
         arg0.getSession().getServletContext().setAttribute("userCount", userCount);
         Map<String, User> userMap = (Map<String, User>) arg0.getSession().getServletContext().getAttribute("userMap");
