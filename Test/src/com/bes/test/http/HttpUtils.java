@@ -120,9 +120,9 @@ public class HttpUtils {
         Map<String, String> paramMap = new HashMap<String, String>();
         String url = "http://utf8.sms.webchinese.cn/";
         String method = "GET";
-        paramMap.put("UID", "bessms");
-        paramMap.put("KEY", "eeec0d02edd050cc1096");
-        paramMap.put("smsMob", "18366139183");
+        paramMap.put("UID", "xxxxx");
+        paramMap.put("KEY", "xxxxxxxxxx");
+        paramMap.put("smsMob", "xxxxxxxxxxx");
         paramMap.put("smsText", "yanzhengma：8888Just+test+it.");
         System.out.println(execute(url, method, paramMap));
     }
