@@ -16,5 +16,12 @@ public class ConcreteSubject extends Subject {
         this.subjectState = subjectState;
         this.notifyObservers();
     }
-    
+
+    // 在子类中具体实现notifyObservers()方法，实现根据不同的状态区别对待不同的观察者
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update(this);
+        }
+    }
 }

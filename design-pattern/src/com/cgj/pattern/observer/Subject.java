@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * 目标对象，它知道观察它的观察者，并提供注册（添加）和删除观察者的接口
  */
-public class Subject {
+public abstract class Subject {
 
     // 用来保存注册的观察者对象
     List<Observer> observers = new ArrayList<Observer>();
@@ -21,10 +21,12 @@ public class Subject {
         observers.remove(observer);
     }
 
-    // 向所有注册的观察者对象发送消息
-    public void notifyObservers() {
+    // 定义抽象的notifyObservers()方法，在子类中去具体实现可实现区别对待观察者
+    protected abstract void notifyObservers();
+
+    /*public void notifyObservers() {
         for (Observer observer : observers) {
             observer.update(this);
         }
-    }
+    }*/
 }
