@@ -34,6 +34,11 @@ class ReverseList<T> extends ArrayList<T> {
                         Object[] elementData = toArray();
                         return (T) elementData[ReverseCursor--];
                     }
+
+                    @Override
+                    public void remove() {
+                        throw new UnsupportedOperationException("remove");
+                    }
                 };
             }
         };
