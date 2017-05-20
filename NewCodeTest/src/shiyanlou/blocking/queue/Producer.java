@@ -16,9 +16,13 @@ class Producer implements Runnable {
     public void run() {
         try {
             while (count.get() < 10) {
-                String course = "Course" + count.incrementAndGet();
-                System.out.println("Complete production:" + course);
-                queue.put(course);
+                synchronized (count) {
+                    if (count.get() < 10) {
+                        String course = "Course" + count.incrementAndGet();
+                        System.out.println("Complete production:" + course);
+                        queue.put(course);
+                    }
+                }
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

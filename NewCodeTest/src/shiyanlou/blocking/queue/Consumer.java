@@ -16,11 +16,12 @@ class Consumer implements Runnable {
     public void run() {
         try {
             while (count.getAndIncrement() < 10) {
-                String course = queue.take();
-                System.out.println("Complete consumption:" + course);
+                synchronized (count) {
+                    String course = queue.take();
+                    System.out.println("Complete consumption:" + course);
+                }
             }
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
