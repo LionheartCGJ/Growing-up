@@ -1,4 +1,4 @@
-package co.cgj.pattern.builder;
+package com.cgj.pattern.builder;
 
 import java.util.ArrayList;
 import java.util.List;

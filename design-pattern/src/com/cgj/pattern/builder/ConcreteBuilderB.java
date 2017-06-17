@@ -1,20 +1,20 @@
-package co.cgj.pattern.builder;
+package com.cgj.pattern.builder;
 
 /**
  * 具体的建造者类，实现Builder接口，构造和装配各个部件
  */
-public class ConcreteBuilderA implements Builder {
+public class ConcreteBuilderB implements Builder {
 
     private Product product = new Product();
 
     @Override
     public void builderPartA() {
-        product.AddPart("partM");
+        product.AddPart("partX");
     }
 
     @Override
     public void builderPartB() {
-        product.AddPart("partN");
+        product.AddPart("partY");
 
     }
 

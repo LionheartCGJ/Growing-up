@@ -1,4 +1,4 @@
-package co.cgj.pattern.builder;
+package com.cgj.pattern.builder;
 
 /**
  * 建造者模式：

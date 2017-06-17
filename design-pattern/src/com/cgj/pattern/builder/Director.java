@@ -1,4 +1,4 @@
-package co.cgj.pattern.builder;
+package com.cgj.pattern.builder;
 
 /**
  * 指挥者类，用来指挥建造过程

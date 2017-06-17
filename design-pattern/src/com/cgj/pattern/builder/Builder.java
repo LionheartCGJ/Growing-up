@@ -1,4 +1,4 @@
-package co.cgj.pattern.builder;
+package com.cgj.pattern.builder;
 
 /**
  * 建造者的抽象类，为创建Product对象时指定各个部件
