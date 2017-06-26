@@ -1,5 +1,8 @@
 package com.cgj.pattern.flyweight;
 
+/**
+ * Blogs: http://www.cnblogs.com/LionheartCGJ/p/7072029.html
+ */
 public class Test {
 
     public static void main(String[] args) {

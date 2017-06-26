@@ -3,6 +3,9 @@ package com.cgj.pattern.interpreter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Blogs: http://www.cnblogs.com/LionheartCGJ/p/7074843.html
+ */
 public class Test {
 
     public static void main(String[] args) {
