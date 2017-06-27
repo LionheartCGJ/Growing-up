@@ -1,4 +1,4 @@
-package co.cgj.pattern.iterator;
+package com.cgj.pattern.iterator;
 
 import java.util.ArrayList;
 import java.util.List;

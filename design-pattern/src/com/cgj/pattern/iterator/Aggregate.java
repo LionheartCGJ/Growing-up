@@ -1,4 +1,4 @@
-package co.cgj.pattern.iterator;
+package com.cgj.pattern.iterator;
 
 /**
  * Aggregate:聚集抽象类

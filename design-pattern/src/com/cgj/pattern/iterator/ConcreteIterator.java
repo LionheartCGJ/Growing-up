@@ -1,4 +1,4 @@
-package co.cgj.pattern.iterator;
+package com.cgj.pattern.iterator;
 
 /**
  * ConcreteIterator:具体迭代器类,实现Iterator接口
