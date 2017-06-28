@@ -1,5 +1,8 @@
 package com.cgj.pattern.mediator;
 
+/**
+ * Blogs: http://www.cnblogs.com/LionheartCGJ/p/7067572.html
+ */
 public class Test {
 
     public static void main(String[] args) {
