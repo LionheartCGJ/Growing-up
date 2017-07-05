@@ -1,4 +1,4 @@
-package com.cgj.test.iotest.zip;
+package com.cgj.test.zip.io;
 
 import java.io.File;
 

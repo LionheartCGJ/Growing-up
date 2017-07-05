@@ -1,4 +1,4 @@
-package com.cgj.test.cmdtest;
+package com.cgj.test.cmd;
 
 public class CMDTest {
 

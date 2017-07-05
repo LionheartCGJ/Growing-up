@@ -1,4 +1,4 @@
-package com.cgj.junit.test;
+package com.cgj.test.junit;
 
 
 import static org.junit.Assert.assertEquals;
@@ -8,6 +8,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.cgj.test.junit.Calculate;
 
 /**
  * 1.Failure一般由单元测试的断言方法判断失败所引起，这表示测试点发现了问题，就是说程序输出结果和我们预期的不一样

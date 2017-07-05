@@ -1,4 +1,4 @@
-package com.cgj.junit.test;
+package com.cgj.test.junit;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+
+import com.cgj.test.junit.Calculate;
 
 /**
  * 对一个方法进行多组数据的测试

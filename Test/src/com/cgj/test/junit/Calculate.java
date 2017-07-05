@@ -1,4 +1,4 @@
-package com.cgj.junit.test;
+package com.cgj.test.junit;
 
 public class Calculate {
     public int add(int a, int b) {
