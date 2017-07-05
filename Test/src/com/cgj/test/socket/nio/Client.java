@@ -1,4 +1,4 @@
-package com.bes.test.socket.nio;
+package com.cgj.test.socket.nio;
 
 import java.io.IOException;
 import java.io.InputStream;

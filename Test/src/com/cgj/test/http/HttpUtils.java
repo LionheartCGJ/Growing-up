@@ -1,4 +1,4 @@
-package com.bes.test.http;
+package com.cgj.test.http;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
