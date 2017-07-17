@@ -37,8 +37,8 @@ public class ScanDirectoryScheduler {
         JobDataMap dataMap = new JobDataMap();
         dataMap.put("SCAN_DIR", "F:\\Program Files\\CloudMusic");
         dataMap.put("FILE_EXTENSION", ".dll");
-        JobDetail jobDetail = JobBuilder.newJob().withIdentity("ScanDirectory", Scheduler.DEFAULT_GROUP)
-                .setJobData(dataMap).ofType(ScanDirectoryJob.class).requestRecovery(false)
+        JobDetail jobDetail = JobBuilder.newJob(ScanDirectoryJob.class).withIdentity("ScanDirectory", Scheduler.DEFAULT_GROUP)
+                .setJobData(dataMap).requestRecovery(false)
                 .withDescription("Scan direct job").build();
         // Create a trigger that fires every 25 seconds, forever
         Date runTime = DateBuilder.evenMinuteDate(new Date());
